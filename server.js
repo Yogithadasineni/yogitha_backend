@@ -42,7 +42,9 @@ const dotenv = require('dotenv');
 const cors = require('cors'); // Make sure you import cors at the top
 const path = require('path');
 
-const connectDB = require('./config/db');
+// const connectDB = require('./config/db');
+const connectDB = require('./db');
+
 const EmployeeRoutes = require('./routes/employeeRoutes');
 const AssetRoutes = require('./routes/assestRoutes');
 
