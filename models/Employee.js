@@ -6,7 +6,9 @@ const employeeSchema = new mongoose.Schema({
   dept: { type: String, required: true },
   phone: { type: String, required: true },
   address: { type: String, required: true },
-  training: [{ type: String }],
+   training: [{ type: String }],
+  //  training: { type: String }, // ✅ Store as string like: "React-Java-SQL"
+
   photo: { type: String },
   link: { type: String }
 });
