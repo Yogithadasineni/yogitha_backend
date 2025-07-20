@@ -2,15 +2,14 @@ const mongoose = require('mongoose');
 
 const employeeSchema = new mongoose.Schema({
   empid: { type: String, required: true, unique: true },
-  name: { type: String, required: true },
-  dept: { type: String, required: true },
-  phone: { type: String, required: true },
-  address: { type: String, required: true },
-   training: [{ type: String }],
-  //  training: { type: String }, // ✅ Store as string like: "React-Java-SQL"
-
-  photo: { type: String },
-  link: { type: String }
+  name: String,
+  dept: String,
+  phone: String,
+  address: String,
+  training: [String],
+  photo: String, // stores photo filename
+  qrCodeImage: String, // stores QR code image filename
+  link: String, // optional: QR content
 });
 
 module.exports = mongoose.model('Employee', employeeSchema);

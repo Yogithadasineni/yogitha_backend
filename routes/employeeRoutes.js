@@ -1,34 +1,70 @@
+// const express = require('express');
+// const multer = require('multer');
+// const path = require('path');
+// const {
+//   createEmployee,
+//   getAllEmployees,
+//   getEmployee, // ✅ Make sure this is imported
+// } = require('../controllers/employeeController');
+
+// const router = express.Router();
+
+// // Upload config
+// const storage = multer.diskStorage({
+//   destination: (req, file, cb) => cb(null, 'uploads/'),
+//   filename: (req, file, cb) =>
+//     cb(null, Date.now() + path.extname(file.originalname)),
+// });
+// const upload = multer({ storage });
+
+// // Routes
+// router.post('/add', upload.single('photo'), createEmployee);
+// router.get('/all', getAllEmployees);
+// router.get('/employee/:empid', getEmployee); // ✅ Use imported function
+
+// module.exports = router;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 const express = require('express');
-const router = express.Router();
 const multer = require('multer');
 const path = require('path');
-const employeeController = require('../controllers/employeeController');
+const {
+  createEmployee,
+  getAllEmployees,
+  getEmployee,
+  editEmployee,
+  deleteEmployee,
+} = require('../controllers/employeeController');
 
-// Multer config
+const router = express.Router();
+
+// Upload config
 const storage = multer.diskStorage({
   destination: (req, file, cb) => cb(null, 'uploads/'),
-  filename: (req, file, cb) => {
-    const uniqueName = Date.now() + '-' + Math.round(Math.random() * 1e9) + path.extname(file.originalname);
-    cb(null, uniqueName);
-  }
+  filename: (req, file, cb) =>
+    cb(null, Date.now() + path.extname(file.originalname)),
 });
-
-const fileFilter = (req, file, cb) => {
-  const allowedTypes = /jpeg|jpg|png/;
-  const extName = allowedTypes.test(path.extname(file.originalname).toLowerCase());
-  const mimeType = allowedTypes.test(file.mimetype);
-  if (extName && mimeType) {
-    cb(null, true);
-  } else {
-    cb(new Error('Only .jpeg, .jpg, .png image files are allowed!'));
-  }
-};
-
-const upload = multer({ storage, fileFilter });
+const upload = multer({ storage });
 
 // Routes
-router.post('/employee', upload.single('photo'), employeeController.createEmployee);
-router.get('/employee/:empid', employeeController.getEmployee);
-router.get('/employees', employeeController.getAllEmployees);
+router.post('/add', upload.single('photo'), createEmployee);
+router.get('/all', getAllEmployees);
+router.get('/employee/:empid', getEmployee);
+router.put('/employee/:empid', upload.single('photo'), editEmployee); // ✅ Edit
+
+router.delete('/employee/:empid', deleteEmployee); // ✅ Delete
 
 module.exports = router;
