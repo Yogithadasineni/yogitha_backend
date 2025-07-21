@@ -52,8 +52,14 @@ app.use(express.json());
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // Routes
-app.use('/emp', EmployeeRoutes);
-app.use('/assets', AssetRoutes);
+// app.use('/emp', EmployeeRoutes);
+// app.use('/assets', AssetRoutes);
+
+
+// Routes
+app.use('/api/employees', EmployeeRoutes);
+app.use('/api/assets', AssetRoutes);
+
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, '0.0.0.0', () => console.log(`Server running on port ${PORT}`));

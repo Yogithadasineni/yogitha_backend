@@ -4,7 +4,9 @@
 // const {
 //   createEmployee,
 //   getAllEmployees,
-//   getEmployee, // ✅ Make sure this is imported
+//   getEmployee,
+//   editEmployee,
+//   deleteEmployee,
 // } = require('../controllers/employeeController');
 
 // const router = express.Router();
@@ -20,15 +22,12 @@
 // // Routes
 // router.post('/add', upload.single('photo'), createEmployee);
 // router.get('/all', getAllEmployees);
-// router.get('/employee/:empid', getEmployee); // ✅ Use imported function
+// router.get('/employee/:empid', getEmployee);
+// router.put('/employee/:empid', upload.single('photo'), editEmployee); // ✅ Edit
+
+// router.delete('/employee/:empid', deleteEmployee); // ✅ Delete
 
 // module.exports = router;
-
-
-
-
-
-
 
 
 
@@ -51,7 +50,7 @@ const {
 
 const router = express.Router();
 
-// Upload config
+// Upload setup
 const storage = multer.diskStorage({
   destination: (req, file, cb) => cb(null, 'uploads/'),
   filename: (req, file, cb) =>
@@ -59,12 +58,11 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage });
 
-// Routes
+// ROUTES
 router.post('/add', upload.single('photo'), createEmployee);
 router.get('/all', getAllEmployees);
 router.get('/employee/:empid', getEmployee);
-router.put('/employee/:empid', upload.single('photo'), editEmployee); // ✅ Edit
-
-router.delete('/employee/:empid', deleteEmployee); // ✅ Delete
+router.put('/employee/:empid', upload.single('photo'), editEmployee);
+router.delete('/employee/:empid', deleteEmployee);
 
 module.exports = router;
