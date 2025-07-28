@@ -58,10 +58,12 @@ app.use(express.json());
 
 // Serve static files
 app.use('/photos', express.static(path.join(__dirname, 'uploads/photos')));
-app.use('/documents', express.static(path.join(__dirname, 'uploads/documents')));
+// app.use('/documents', express.static(path.join(__dirname, 'uploads/documents')));
 app.use('/qrcodes', express.static(path.join(__dirname, 'uploads/qrcodes')));
 
 app.use('/uploads', express.static('uploads'));
+app.use('/documents', express.static(path.join(__dirname, 'uploads/documents')));
+
 
 // Routes
 app.use('/api/employees', EmployeeRoutes);
